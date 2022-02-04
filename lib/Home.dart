@@ -44,9 +44,9 @@ class _HomeState extends State<Home> {
                     width: mediaQuery.width,
                     padding: EdgeInsets.all(8),
                     child: Column(children: [
-                      Text(items[index].name.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                      Text(items[index].name.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
                       SizedBox(height: 5,),
-                      Text(items[index].email.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
+                      Text(items[index].email.toString(),style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
                     ]),
                   ),
                 );
