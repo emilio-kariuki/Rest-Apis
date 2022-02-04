@@ -30,7 +30,13 @@ class _HomeState extends State<Home> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return  Scaffold();
   }
 }
