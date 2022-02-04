@@ -60,7 +60,9 @@ class _HomeState extends State<Home> {
                     ]),
                   ),
                 );
-              });
+              },
+              itemCount: items.length,
+              );
             } else {
               return const Center(child: CircularProgressIndicator());
             }
