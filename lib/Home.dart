@@ -6,7 +6,6 @@ import "package:flutter/material.dart";
 import 'package:flutter/services.dart' as rootBundle;
 import 'package:rest_api/model/ReadDataModel.dart';
 
-
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -16,9 +15,10 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   Future<List<ReadDataModel>> ReadData() async {
-    final assetBundle = DefaultAssetBundle.of(context);
-    final information = await assetBundle.loadString('assets/person.json');
-    final data = jsonDecode(information) as List<dynamic>;
+    final jsondata =
+        await rootBundle.rootBundle.loadString('assets/person.json');
+    // final information = await assetBundle.loadString('assets/person.json');
+    final data = jsonDecode(jsondata) as List<dynamic>;
     return data.map((e) => ReadDataModel.fromJson(e)).toList();
   }
 
@@ -44,9 +44,19 @@ class _HomeState extends State<Home> {
                     width: mediaQuery.width,
                     padding: EdgeInsets.all(8),
                     child: Column(children: [
-                      Text(items[index].name.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
-                      SizedBox(height: 5,),
-                      Text(items[index].email.toString(),style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
+                      Text(
+                        items[index].name.toString(),
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        items[index].email.toString(),
+                        style: TextStyle(
+                            fontSize: 10, fontWeight: FontWeight.bold),
+                      ),
                     ]),
                   ),
                 );
