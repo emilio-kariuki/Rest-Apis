@@ -4,10 +4,8 @@ class ReadDataModel {
 
   ReadDataModel({required this.name, required this.email});
 
-  ReadDataModel.fromJson(json) {
-    name:
-    json["name"];
-    email:
-    json["email"];
+  ReadDataModel.fromJson(Map<String, dynamic>json) {
+    name: json["name"];
+    email: json["email"];
   }
 }
