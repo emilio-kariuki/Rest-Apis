@@ -1,3 +1,5 @@
+// ignore_for_file: unused_label
+
 class ReadDataModel {
   String? name;
   String? email;
