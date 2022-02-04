@@ -16,7 +16,7 @@ class _HomeState extends State<Home> {
   void getData() {
     // ignore: unused_local_variable
     Future<String> loadDetails() async {
-      return await rootBundle.loadString('assets/button.json');
+      return await rootBundle.loadString('assets/person.json');
 
       // ignore: dead_code
       Future<String> loadpos() async {
