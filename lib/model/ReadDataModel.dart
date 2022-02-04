@@ -8,6 +8,6 @@ class ReadDataModel {
 
   ReadDataModel.fromJson(Map<String, dynamic>json) {
     name: json["name"];
-    email: json["email"];
+    email: json["Email"];
   }
 }
