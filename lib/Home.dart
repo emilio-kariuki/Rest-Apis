@@ -1,9 +1,11 @@
-// ignore_for_file: unused_element, avoid_print
+// ignore_for_file: unused_element, avoid_print, non_constant_identifier_names, prefer_const_constructors
 
 import 'dart:convert';
 
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
+import 'package:rest_api/model/ReadDataModel.dart';
+
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -13,30 +15,46 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  void getData() {
-    // ignore: unused_local_variable
-    Future<String> loadDetails() async {
-      return await rootBundle.loadString('assets/person.json');
-
-      // ignore: dead_code
-      Future<String> loadpos() async {
-        String jsonword = await loadDetails();
-        //  _parseJsonForPos(jsonword);
-        List data = json.decode(jsonword);
-        // data[0]["backgrndcolor"] = "black";
-        print(data);
-      }
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getData();
+  Future<Map<String, dynamic>> ReadData() async {
+    final assetBundle = DefaultAssetBundle.of(context);
+    final information = await assetBundle.loadString('assets/person.json');
+    Map<String, dynamic> data = jsonDecode(information);
+    return data;
   }
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold();
+    final mediaQuery = MediaQuery.of(context).size;
+    return Scaffold(
+      body: FutureBuilder(
+          future: ReadData(),
+          builder: (context, data) {
+            if (data.hasError) {
+              return Center(
+                child: const Text("The data has an error"),
+              );
+            } else if (data.hasData) {
+              var items = data.data as List<ReadDataModel>;
+              return ListView.builder(itemBuilder: (context, index) {
+                return Card(
+                  elevation: 5,
+                  margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  child: Container(
+                    height: 50,
+                    width: mediaQuery.width,
+                    padding: EdgeInsets.all(8),
+                    child: Column(children: [
+                      Text(items[index].name.toString(),style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
+                      SizedBox(height: 5,),
+                      Text(items[index].email.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
+                    ]),
+                  ),
+                );
+              });
+            } else {
+              return const Center(child: CircularProgressIndicator());
+            }
+          }),
+    );
   }
 }
