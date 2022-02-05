@@ -1,13 +1,25 @@
-// ignore_for_file: unused_label
+import 'dart:convert';
 
-class ReadDataModel {
-  String? name;
-  String? email;
+List<User> userFromJson(String str) => List<User>.from(json.decode(str).map((x) => User.fromJson(x)));
 
-  ReadDataModel({required this.name, required this.email});
+String userToJson(List<User> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-  ReadDataModel.fromJson(Map<String, dynamic>json) {
-    name: json["name"];
-    email: json["Email"];
-  }
+class User {
+    User({
+        required this.name,
+        required this.email,
+    });
+
+    String name;
+    String email;
+
+    factory User.fromJson(Map<String, dynamic> json) => User(
+        name: json["name"],
+        email: json["Email"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "name": name,
+        "Email": email,
+    };
 }

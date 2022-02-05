@@ -14,12 +14,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  Future<List<ReadDataModel>> ReadData() async {
+  Future<List<User>> ReadData() async {
     final jsondata =
         await rootBundle.rootBundle.loadString('assets/person.json');
     // final information = await assetBundle.loadString('assets/person.json');
     final data = jsonDecode(jsondata) as List<dynamic>;
-    return data.map((e) => ReadDataModel.fromJson(e)).toList();
+    return data.map((e) => User.fromJson(e)).toList();
   }
 
   @override
@@ -34,7 +34,7 @@ class _HomeState extends State<Home> {
                 child: const Text("The data has an error"),
               );
             } else if (data.hasData) {
-              var items = data.data as List<ReadDataModel>;
+              var items = data.data as List<User>;
               return ListView.builder(itemBuilder: (context, index) {
                 return Card(
                   elevation: 5,
